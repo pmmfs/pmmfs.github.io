@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+
+    <!--Bootstrap styling-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <!--Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+</head>
+
+<body class="bg-dark">
+    <div class="container-fluid d-flex justify-content-center sticky-top bg-dark">
+
+        <!--Navigation Bar-->
+        <!-- <div class="row">
+        <div class="col-md-12 d-flex justify-content-start"> -->
+            <nav class="navbar navbar-dark navbar-expand-lg">
+                <a class="navbar-brand" href="#model">
+                    <button type="button" class="btn btn-outline-light">Our Model</button></a>
+                <a class="navbar-brand" href="#the-infection">
+                    <button type="button" class="btn btn-outline-light">The Infection</button></a>
+                <a class="navbar-brand" href="#the-response">
+                    <button type="button" class="btn btn-outline-light">The Response</button></a>
+                <a class="navbar-brand" href="#outcomes">
+                    <button type="button" class="btn btn-outline-light">Outcomes</button></a>
+                <a class="navbar-brand" href="#conclusions">
+                    <button type="button" class="btn btn-outline-light">Conclusions</button></a>
+            </nav>
+        <!-- </div>
+        </div> -->
+
+    </div>
+
+        <!-- jumbotron -->
+        <div class="row d-flex justify-content-center mt-1 mb-2">
+        <div class="col-md-12">
+            <div class='jumbotron text-center' id="banner_1">
+                <h1 class="display-4">COVID-WHAT?</h1>
+            </div>
+        </div>
+        </div>
+
+    <div class="container max-auto">
+
+        <div class="row d-flex justify-content-center mb-3">
+            <h2>Introduction</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+            <h5 style= "text-align:left;">
+            On Sept. 22, 2020, the 
+            <a href="https://covid19.who.int/?gclid=CjwKCAjwwab7BRBAEiwAapqpTPhhtEwzZFGMWPn4MM2-YNPRDin7Sn6xks23lTd7wnHLhuRufRrDaRoCYEoQAvD_BwE">World Health Organization (WHO)</a> 
+            reported 31,132,906 cases of
+            COVID-19,including 962,008 deaths. In an article featured on June 8, 2020, 
+            <a href="https://www.worldbank.org/">The World Bank</a> predicted a "5.2% contraction
+            in global GDP in 2020... the deepest global recession in decades".<br><br>
+
+            The societal burden of COVID-19 is clear and the world's future, from a standpoint of the
+            economy and potential for future pandemics, is sobering.<br><br>
+
+            This project had two goals:<br><br>
+            (1) To create a machine learning (ML) model that predicts the number of total cases and deaths.<br> 
+            (2) To evaluate government responses and determine which measures resulted in better outcomes.<br><br>
+            
+            Data sources included the 
+            <a href="https://www.bsg.ox.ac.uk/research/research-projects/coronavirus-government-response-tracker">Oxford University Blavatnik School of Government</a>,
+            <a href="https://ourworldindata.org/coronavirus">Our World In Data</a>, and 
+            <a href="https://www.google.com/covid19/mobility/">Google Community Mobility Reports</a>.<br><br>
+
+            Models and findings from this project could be adapted for use in future pandemics
+            to predict numbers of cases and deaths and to inform government policies.
+            Visit <a href="https://github.com/pmmfs/capstone-project">our GitHub repo</a> for project details.
+            </h5>
+            </div>
+            
+        </div>
+    
+    </div>
+
+    <div class="row m-5"><a id="model"></a></div>
+
+    <!----------------------MODELLING COVID-19----------------------->
+    <!-- jumbotron -->
+    <div class="row d-flex justify-content-center mt-1 mb-4">
+        <div class="col-md-12">
+            <div class='jumbotron text-center' id="banner_3">
+                <h1>COVID-19 Model</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container max-auto">
+
+        <div class="row">
+            <div class="col-md-12 text-center mb-5">
+                <h5 style= "text-align:left;">
+                A supervised machine learning (ML) model was created to predict future counts of total cases and deaths.
+                <!--Text for ML map: Use the map to compare the model's predictions with actual counts.-->
+                </h5>
+            </div>
+        </div>
+
+        <!--map for supervised ML in progress-->
+        <!-- <div class="row">
+            <div class="col-md-12 d-flex justify-content-center mb-5">
+                <div id="mapModel"></div>
+            </div>
+        </div> -->
+
+        <div class="row d-flex justify-content-center mb-3">
+            <h2>Feature Selection</h2>
+        </div>
+
+        <div class="text-center mb-4">
+            <h5>
+            Features were selected for the model based on the feature importances of a Random Forest Regressor model.
+            </h5>
+        </div>
+
+        <!-----PIE CHARTS---->
+        <div class="row d-flex justify-content-center">
+            <div class="col px-md-6 d-flex justify-content-center">
+                <div id="pieTC"></div>
+            </div>
+            <div class="col px-md-6 d-flex justify-content-center">
+                <div id="pieTD"></div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="row m-5"><a id="the-infection"></a></div>
+
+    <!----------------------THE INFECTION----------------------->
+    <!-- jumbotron -->
+    <div class="row d-flex justify-content-center mb-2">
+        <div class="col-md-12">
+            <div class='jumbotron text-center' id="banner_3">
+                <h1>The Infection</h1>
+            </div>
+        </div>
+    </div>
+    
+   <div class="container max-auto">
+
+        <div class="row d-flex justify-content-center m-4">
+            <div class="col_md_12 text-center">
+                <h1>New Cases / Deaths</h1>
+            </div>
+        </div>
+
+        <!-- Filter & text -->
+        <div class="row mb-4">
+            <!--Filter-->
+            <div class="col-md-3 d-flex justify-content-center my-auto">
+                <form class="bg-dark">
+                <ul class="list-group">
+
+                    <li class="list-group-item bg-dark text-center">
+                        <label for="selCountry1">Country 1</label>
+                        <div class="well">
+                            <select id="selCountry1"></select>
+                        </div>
+                    </li>
+                    <li class="list-group-item bg-dark text-center">
+                        <label for="selCountry2">Country 2</label>
+                        <div class="well">
+                            <select id="selCountry2"></select>
+                        </div>
+                    </li>
+                    <li class="list-group-item bg-dark text-center">
+                        <button id="submit1-btn" type="button" class="btn btn-outline-light">Submit</button>
+                    </li>
+                </ul>
+                </form>
+            </div>
+            
+            <!--Text--> 
+            <div class="col-md-9 text-left mt-5 pt-5 my-auto">
+                <h5>
+                The human cost of COVID-19 is shown below.<br><br>
+                View the numbers of new cases and new deaths for one country
+                or compare numbers between countries.<br><br>
+                Dates begin as early as January 1, 2020 and end on August 31, 2020.
+                </h5>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center mb-4">
+            <!--Line Chart: New Cases & Total Cases-->
+            <div class="col px-md-6 d-flex justify-content-center">
+                <div id="lineNewCases"></div>
+            </div>
+            <div class="col px-md-6 d-flex justify-content-center">
+                <div id="lineTotalCases"></div>
+            </div>
+        </div>
+
+        <!--Line Chart: New Deaths & Total Deaths-->
+        <div class="row d-flex justify-content-center mb-4">
+            <div class="col px-md-6 d-flex justify-content-center">
+                <div id="lineNewDeaths"></div>
+            </div>
+            <div class="col px-md-6 d-flex justify-content-center">
+                <div id="lineTotalDeaths"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row m-5"><a id="the-response"></a></div>
+
+    <!-----------------------THE RESPONSE----------------------->
+    <!-- jumbotron -->
+    <div class="row d-flex justify-content-center mb-2">
+        <div class="col-md-12">
+            <div class='jumbotron text-center' id="banner_3">
+                <h1>The Response</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container max-auto">
+
+        <div class="row d-flex justify-content-center mb-5">
+            <div class="col text-center">
+                <h5 style= "text-align:left;">
+                To compare government responses between countries,
+                Oxford University created an index ("government response index" (GR))
+                that rated government responses on a scale of 0 to 100. 
+
+                An index of zero meant no measures,
+                whereas 100 meant that the most aggressive measures, relative to all countries, were employed.<br><br>
+
+                The GR index was an aggregate of the indices stringency, health/containment,
+                and economic support. These indices rated government responses by their respective categories
+                (e.g. stringency), also on a scale of 0 to 100.
+
+                Each index grouped similar government measures. For example, stringency (i.e.
+                behavioural restrictions) included government measures such as "school closures"
+                and "stay at home requirements".<br><br>
+
+                Select the index to view the government measures that it evaluates,
+                and to display its top 5 and bottom 5 countries.<br><br>
+
+                Use the map to compare countries' scores for each index.
+                </h5>    
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center mb-1">
+                <h2>Choose The Index</h2>
+        </div>
+        <div class="row mb-5">
+            <div class="col-md-12 d-flex justify-content-center">
+                <div class="well">
+                    <select id="selDataset" onchange="indexChanged(this.value)"></select>
+                </div>
+            </div>
+        </div>
+
+        <!--well, map-->
+        <div class="row d-flex justify-content-center m-4" id="containerWellMap">
+
+            <div class="col px-md-3">
+                <div class="card text-center text-dark">
+                    <div class="card-header" id="index-name"></div>
+                    <div class="card-body">
+                        <div class="card-text" id="index-description"></div>
+                    </div>
+                  </div>
+
+            </div>
+
+            <!--map-->
+            <div class="col px-md-9 d-flex justify-content-center">
+                <div id="mapResponse"></div>
+            </div>
+
+        </div>
+
+        <div class="row d-flex justify-content-center mt-4 mb-4">
+            <div id="barTop5"></div>
+            <div id="barBottom5"></div>
+        </div>
+    
+    </div>
+
+    <div class="row m-5"><a id="outcomes"></a></div>
+
+    <!-----------------------OUTCOMES----------------------->
+    <!-- jumbotron -->
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-12">
+            <div class='jumbotron text-center' id="banner_3">
+                <h1>Outcomes</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container max-auto">
+
+        <div class="row d-flex justify-content-center m-4">
+            <div class="col_md_12 text-center">
+                <h1>Correlations Between Variables</h1>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <h5>
+            Feature and target variables were investigated for correlations.
+            </h5>
+        </div>
+
+        <!--heatmap-->
+        <div class="row">
+        <div class="col-md-12 d-flex justify-content-center mb-4">
+            <div id="heatmap"></div>
+        </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center mb-4">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <h5>Legend For Abbreviations</h5>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item">GR: Government Response Index</a>
+                      <a class="dropdown-item">S: Stringency Index</a>
+                      <a class="dropdown-item">H: Health/Containment Index</a>
+                      <a class="dropdown-item">E: Economic Support Index</a>
+                      <a class="dropdown-item">Tests Per Day: Avg. Number of Tests Per Day (Adjusted For Population)</a>
+                      <a class="dropdown-item">Total Tests: Rate of Increase of Total Tests</a>
+                      <a class="dropdown-item">Pop Density: Population Density</a>
+                      <a class="dropdown-item">M Outdoors: Mobility in Non-Residential Locations (Outside the Home)</a>
+                      <a class="dropdown-item">Max NC: Max. Number of New Cases</a>
+                      <a class="dropdown-item">"3 MO: NC": Number of New Cases 3 Months After the 1st Case</a>
+                      <a class="dropdown-item">"3 MO: TC": Number of Total Cases 3 Months After the 1st Case</a>
+                      <a class="dropdown-item">GR To 1st Case: Time (Days) from the Start of (or Min.) Government Response to the 1st Case</a>
+                      <a class="dropdown-item">Min To Max GR: Time (Days) from the Min. to the Max. Government Response</a>
+                      <a class="dropdown-item">1st Case To Max NC: Time (Days) From the 1st Case to the Max. Number of New Cases</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5 pb-3">
+            <div class="col-md-6">
+                <!--------table for correlations-------->
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingOne">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <h5 class="text-center text-light">
+                                Findings
+                            </h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                        </div>
+                
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body">
+
+                            <table class="table">
+                                <thead class="thead-light text-center">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Variable A</th>
+                                    <th scope="col">Other Variables</th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white">
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>High government response (specifically in stringency & health)</td>
+                                    <td>
+                                        - Decreased mobility outdoors, and increased staying at home <br>
+                                        - Longer time from 1st case to max. number of new cases. ("Flattening the curve.")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>High economic support</td>
+                                    <td>
+                                        - High government response<br>
+                                        - Higher median age
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>High avg. number of tests per day (adjusted for population)</td>
+                                    <td>
+                                        - High rate of increase of total tests<br>
+                                        - Higher max. number of new cases<br>
+                                        - Higher total cases and total deaths 3 months after the 1st case
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">4</th>
+                                    <td>High median age</td>
+                                    <td>
+                                        - Higher number of cases and deaths 3 months after the 1st case
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">5</th>
+                                    <td>High mobility outdoors</td>
+                                    <td>
+                                        - Low government response (mainly in stringency and health)<br>
+                                        - Low max. number of new cases and new deaths<br>
+                                        - (The reverse is true for high mobility in residential locations (staying at home))
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">6</th>
+                                    <td>Longer time from 1st case to max. number of new cases ("flattening the curve")</td>
+                                    <td>
+                                        - Lower number of new and total cases at 3 months
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingOne">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            <h5 class="text-center text-light">Interpretations</h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                    </div>
+                
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <h5 class="card-title text-dark">#1</h5>
+                            <p class="card-text text-dark">
+                            - Stringency measures are being enforced/obeyed<br>
+                            - Strict stringency and health measures did "flatten the curve" to provide relief for healthcare facilities<br>
+                            </p>
+                            <h5 class="card-title text-dark">#2</h5>
+                            <p class="card-text text-dark">
+                            The most proactive governments:<br>
+                            - Provide more economic support<br>
+                            - Belong to countries with older populations<br>
+                            - (Findings may be reflective of "first world countries" which have more resources and tend to have older populations.
+                            Further investigation is required.)<br>
+                            </p>
+                            <h5 class="card-title text-dark">#3</h5>
+                            <p class="card-text text-dark">
+                            - Countries that test more frequently also have higher max. and total numbers of cases and deaths because they test more<br>
+                            </p>
+                            <h5 class="card-title text-dark">#4</h5>
+                            <p class="card-text text-dark">
+                            - Countries with older populations tend to have more cases and deaths.
+                            This is consistent with what is currently known - that COVID-related morbidity and mortality tend to affect older people.<br>
+                            </p>
+                            <h5 class="card-title text-dark">#5</h5>
+                            <p class="card-text text-dark">
+                            - Changes in mobility seem to be "reactive" to government measures and perhaps the media, which broadcasts case and death counts.<br>
+                            </p>
+                            <h5 class="card-title text-dark">#6</h5>
+                            <p class="card-text text-dark">
+                            - "Flattening the curve" or the measures associated with it, also reduce the number of cases and deaths in the longterm.<br>
+                            </p>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+        <hr class="m-5"/>
+    
+    <div class="container max-auto">
+
+        <div class="row d-flex justify-content-center m-3">
+            <div class="col_md_12 text-center">
+                <h1>Country Classes</h1>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12 m-3">
+                <h5>
+                Unsupervised machine learning (ML) was used to group countries into 3 classes (Class 0, Class 1, and Class 2)<br>
+                based on all variables.
+                </h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-center mb-4">
+                <img class="animated-gif" src="https://media.giphy.com/media/5ytzl5ic3uJeZbQSTr/giphy.gif">
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center m-4">
+                <h3>Explore Country Locations</h3>
+        </div>
+
+        <div class="row d-flex justify-content-center mb-5">
+            <!--Filter-->
+            <div class="col px-md-3 d-flex justify-content-center m-3">
+                <form class="bg-dark">
+                <h4 class="text-center">Lists of Countries By Class</h4>
+                <ul class="list-group">
+                    <li class="list-group-item bg-dark text-center">
+                        <label for="selClass0">Class 0</label>
+                        <div class="well">
+                            <select id="selClass0"></select>
+                        </div>
+                    </li>
+                    <li class="list-group-item bg-dark text-center">
+                        <label for="selClass1">Class 1</label>
+                        <div class="well">
+                            <select id="selClass1"></select>
+                        </div>
+                    </li>
+                    <li class="list-group-item bg-dark text-center">
+                        <label for="selClass2">Class 2</label>
+                        <div class="well">
+                            <select id="selClass2"></select>
+                        </div>
+                    </li>
+                </ul>
+                </form>
+            </div>
+
+            <div class="col px-md-9 d-flex justify-content-center">
+                <!--map: country classes-->
+                <div id="mapClasses"></div>
+            </div>
+        </div>
+
+        <div class="row text-center m-4">
+            <div class="col-md-12">
+                <h5>Classes were compared to find differences in feature and target variables,<br>
+                    and a profile was created for each class.</h5><br>
+                <p>For the plot below, "change" in mobility is shown, where a positive value means increased mobility "outside the home",<br> 
+                    zero means no change from baseline,
+                    and a negative value means decreased mobility "outside the home".</p>
+            </div>
+        </div>
+
+        <!--boxplots-->
+        <div class="row d-flex justify-content-center m-3">
+            <div class="col_md_4 text-center mr-3">
+                <div id="boxplot_GR"></div>
+            </div>
+            <div class="col_md_4 text-center">
+                <div id="boxplot_age"></div>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center m-3">
+            <div class="col_md_4 text-center mr-3">
+                <div id="boxplot_mobil"></div>
+            </div>
+            <div class="col_md_4 text-center">
+                <div id="boxplot_TC3MO"></div>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-md-12">
+                <!--------Supplementary Plots-------->
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingSuppPlots">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSuppPlots" aria-expanded="false" aria-controls="collapseSuppPlots">
+                            <h5 class="text-center text-light">
+                                Supplementary Plots
+                            </h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                        </div>
+                
+                        <div id="collapseSuppPlots" class="collapse" aria-labelledby="headingSuppPlots" data-parent="#accordion">
+                        <div class="card-body bg-dark">
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col_md_4 text-center">
+                                    <div id="boxplot_firstNCMaxND"></div>
+                                </div>
+                                <div class="col_md_4 text-center">
+                                    <div id="boxplot_maxND"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-4">
+            <div class="col-md-12">
+                <!--------table for correlations-------->
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingThree">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h5 class="text-center text-light">
+                                Class Profiles
+                            </h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                        </div>
+                
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body">
+
+                            <table class="table">
+                                <thead class="thead-light text-center">
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Class 0</th>
+                                    <th scope="col">Class 1</th>
+                                    <th scope="col">Class 2</th>
+                                </tr>
+                                </thead>
+                                <tbody class="bg-white">
+                                <tr>
+                                    <th scope="row">Country<br>Characteristics</th>
+                                    <td>
+                                        - Lower government response<br>
+                                        - Low mobility restrictions
+
+                                    </td>
+                                    <td>
+                                        - Higher government response<br>
+                                        - Governments reacted before or around the time of the 1st case (results not shown)<br>
+                                        - High avg. number of tests per day (results not shown)<br>
+                                        - Lower mobility restrictions<br>
+                                        - High median age
+                                    </td>
+                                    <td>
+                                        - Higher government response<br>
+                                        - High mobility restrictions
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Country<br>Outcomes</th>
+                                    <td>
+                                        - Lower max. number of cases & deaths<br><br>
+                                        3 months after the 1st case:<br>
+                                        - Lower number of new cases & deaths (data not shown)<br>
+                                        - Lower number of total cases & deaths
+                                    </td>
+                                    <td>
+                                        - Took less time to increase from 1st case to max. number of new cases & deaths<br><br>
+                                        3 months after the 1st case:<br>
+                                        - Higher number of new cases & deaths (results not shown)<br>
+                                        - Higher number of total cases and deaths
+                                    </td>
+                                    <td>
+                                        - Higher number of max. new cases & deaths<br><br>
+                                        3 months after the 1st case:<br>
+                                        - Lower number of new cases & deaths (results not shown)<br>
+                                        - Lower number of total cases & deaths
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row m-4 mb-5 pb-3">
+            <div class="col-md-12">
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingFour">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <h5 class="text-center text-light">Interpretations</h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                        </div>
+                
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                            <div class="card-body">
+
+                                <table class="table">
+                                    <thead class="thead-light text-center">
+                                        <tr>
+                                            <th scope="col text-center">Class</th>
+                                            <th scope="col text-center">Interpretations</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white">
+                                    <tr>
+                                        <th scope="row">0</th>
+                                        <td>
+                                        - Class 0 seemed to contain countries that were less affected by COVID as shown by lower overall numbers of cases and deaths. If this is true, then their lower government responses and more relaxed mobility restrictions were appropriate.<br> 
+                                        - An alternate explanation is that these countries were affected by COVID but their governments did not respond appropriately and tested less frequently. In this case, the lower numbers of cases and deaths resulted from scarcity of testing and did not represent these countries’ true situations. 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>
+                                        Class 1 countries had high government responses, their governments usually acted before the 1st case occurred, and they tested more frequently. However, because of the countries' older populations and their more relaxed mobility restrictions, these countries had higher counts of cases and deaths 3 months after their first case.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2</th>
+                                        <td>
+                                        - Class 2 countries had high government responses and were strict with mobility restrictions. However, they showed higher max. numbers of new cases and deaths, and lower counts 3 months after their first case.<br> 
+                                        - A possible explanation is that these countries tested more frequently around the time of the max. number of cases and deaths, and less frequently later on. Further investigation is needed.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+        <hr class="m-5"/>
+    
+    <div class="container max-auto">
+
+        <div class="row d-flex justify-content-center mb-5">
+            <div class="col_md_12 text-center">
+                <h1>The Most Successful <br>Stringency & Health/Containment Measures</h1>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12 mb-5">
+                <h5>
+                <p style= "text-align:left;">    
+                Stringency (S) and health/containment (H) measures were the only components of a government's response 
+                that had, at least, "low" correlation (correlation coefficient of 0.3 to less than 0.5) with an 
+                outcome - time (days) from the first case to the max. number of new cases. <br><br>
+                The longer the time from the first case to the max. number of cases, the more a country was able to
+                "flatten the curve" to provide relief for its healthcare resources.<br><br>
+                To determine what the most effective S & H measures were,  
+                countries were ranked by this outcome, and S & H measures between the top 10 and bottom 10 countries 
+                were compared. 
+                </p>
+                </h5>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingFive">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            <h5 class="text-center text-light">Stringency Measures</h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                        </div>
+                
+                        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table bg-white">
+                                    <thead class="thead-light text-center">
+                                      <tr>
+                                        <th scope="col">Measures</th>
+                                        <th scope="col">Top 10 Countries</th>
+                                        <th scope="col">Bottom 10 Countries</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">School Closures</th>
+                                        <td>Required closures at all levels (targeted)</td>
+                                        <td>Required closures for some levels e.g. high school (general)</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Workplace Closures</th>
+                                        <td>Required closing (or work from home) for some sectors or categories of workers (general)</td>
+                                        <td>Recommended closing (or work from home) (targeted)</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Restrictions On Gathering</th>
+                                        <td>Restrictions on gathering between 10-100 people (targeted)</td>
+                                        <td>Restrictions on gatherings between 100-1000 people (targeted)</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Public Transport Closures</th>
+                                        <td>Recommended closing (or significantly reducing volume/route/means of transport available) (targeted)</td>
+                                        <td>No measures (targeted)</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Stay At Home Requirements</th>
+                                        <td>Require not leaving the house with exceptions for daily exercise, grocery shopping, and "essential" trips (targeted)</td>
+                                        <td>Recommend not leaving the house (targeted)</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingSix">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            <h5 class="text-center text-light">Health/Containment Measures</h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                        </div>
+                
+                        <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+                            <div class="card-body">
+                                <table class="table bg-white">
+                                    <thead class="thead-light text-center">
+                                      <tr>
+                                        <th scope="col">Measures</th>
+                                        <th scope="col">Top 10 Countries</th>
+                                        <th scope="col">Bottom 10 Countries</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">Public Information Campaigns</th>
+                                        <td>Coordinated public information campaign (e.g. across traditional and social media) (general)</td>
+                                        <td>Public officials urging caution about COVID-19 (general)</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Investment In Vaccines</th>
+                                        <td>56 million USD more (4X more)</td>
+                                        <td>---</td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Emergency Investment In Healthcare</th>
+                                        <td>2.6 billion USD more (66X more)</td>
+                                        <td>---</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12 mb-2">
+                <h2>
+                Interpretation
+                </h2>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12 mb-5">
+                <h5>
+                <p style= "text-align:left;">    
+                The top 10 countries had stricter stringency measures, coordinated public information campaigns
+                about COVID, and made larger emergency investments in healthcare and vaccine development. 
+                </p>
+                </h5>
+            </div>
+        </div>
+
+        <div class="row mb-5 pb-4">
+            <div class="col-md-12">
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingSeven">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            <h5 class="text-center text-light">Top & Bottom Countries</h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                        </div>
+                
+                        <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+                            <div class="card-body">
+                        
+                                <div class="row text-dark mb-3">
+                                    <div class="col-md-12">
+                                        <h5>
+                                        The top and bottom countries for "time from first case to max. number of new cases" differ from
+                                        the top and bottom countries if multiple outcomes are considered, such as: <br><br>
+                                        1. time from first case to max. number of new cases<br>
+                                        2. max. number of new cases (adjusted for population)<br>
+                                        3. total cases 3 months after the first case
+                                        </h5>
+                                    </div>
+                                </div>
+
+                                <table class="table bg-white">
+                                    <thead class="thead-light text-center">
+                                      <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Outcome 1 Only</th>
+                                        <th scope="col">All 3 Outcomes</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">Top 10 Countries</th>
+                                        <td>
+                                            1. India<br>2. Indonesia<br>3. Croatia<br>4. Spain<br>5. Philippines<br>6. Japan<br>7. Australia<br>8. Vietname<br>9. Hungary<br>10. Argentina
+                                        </td>
+                                        <td>
+                                            1. Vietnam<br>2. Japan<br>3. Myanmar<br>4. India<br>5. Australia<br>6. Sri Lanka<br>7. Philippines<br>8. Indonesia<br>9. Togo<br>10. Uganda
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Bottom 10 Countries</th>
+                                        <td>
+                                            153. Luxembourg<br>154. Mauritius<br>155. Belarus<br>156. Latvia<br>157. Norway<br>158. Niger<br>159. Uruguay<br>160. Estonia<br>161. Brunei<br>162. Laos
+                                        </td>
+                                        <td>
+                                            153. Ecuador<br>154. Norway<br>155. Portugal<br>156. Austria<br>157. Estonia<br>158. Ireland<br>159. Switzerland<br>160. Djibouti<br>161. Iceland<br>162. Luxembourg
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+
+        <hr class="m-5"/>
+
+    <div class="container max-auto">
+        <div class="row d-flex justify-content-center m-4">
+            <div class="col_md_12 text-center">
+                <h1>Stringency Index "Ramp Up" vs Total Cases / Deaths</h1>
+            </div>
+        </div>
+    
+        <!-- Filter & text -->
+        <div class="row mb-4">
+            <!--Filter-->
+            <div class="col-md-3 d-flex justify-content-center my-auto">
+                <ul class="list-group">
+                    <li class="list-group-item bg-dark text-center">
+                        <label for="selCountry3">Country 1</label>
+                        <div class="well">
+                            <select id="selCountry3"></select>
+                        </div>
+                    </li>
+                    <li class="list-group-item bg-dark text-center">
+                        <label for="selCountry4">Country 2</label>
+                        <div class="well">
+                            <select id="selCountry4"></select>
+                        </div>
+                    </li>
+                    <li class="list-group-item bg-dark text-center">
+                        <button id="submit2-btn" type="button" class="btn btn-outline-light">Submit</button>
+                    </li>
+                </ul>
+                </form>
+            </div>
+    
+            <!--Text--> <!---MK NEW-->
+            <div class="col-md-9 text-left mt-5 pt-5 my-auto">
+                <h5>
+                    Each country’s stringency “ramp up” period (the time it takes for each government to implement their most stringent policies - based on Stringency Index) was isolated.
+                    <br><br>Then each country’s 30, 60, 90, and 120 day reported totals for both total cases and total deaths from the beginning of the ramp up period, as a percentage of population, was captured.
+                    <br><br>Lastly, the global average for both stringency ramp up as well as for total cases and total deaths was determined in order to compare a country’s efforts against the global average, as well as against other countries.
+                </h5>
+            </div>
+        </div>
+          
+        <!-- Line Chart: Ramp Up vs Total Cases & Deaths-->
+        <div class="row d-flex justify-content-center mb-5">
+            <div class="col-5 mr-5">
+                <div id="rampUpCases"></div>
+            </div>
+            <div class="col-5 mr-5">
+                <div id="rampUpDeaths"></div>
+            </div>
+        </div>
+   
+        <div class="row mb-5 pb-4">
+            <div class="col-md-12">
+                <div id="accordion">
+                    <div class="card">
+                        <div class="card-header bg-dark" id="headingFour">
+                        <h5 class="text-center mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseRamp" aria-expanded="false" aria-controls="collapseRamp">
+                            <h5 class="text-center text-light">Further Analysis</h5>
+                            <p class="text-center text-light">(Click Me)</p>
+                            </button>
+                        </h5>
+                        </div>
+            
+                        <div id="collapseRamp" class="collapse" aria-labelledby="headingRamp" data-parent="#accordion">
+                            <div class="card-body">
+
+                                <table class="table">
+                                    <thead class="thead-light text-center">
+                                        <tr>
+                                            <th scope="col text-center">Analysis for Rate of Increase of Total Cases/Deaths</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white">
+                                    <tr>
+                                        <td>
+                                            Investigated whether the <b>(A) slope of the ramp up period</b>, <b>(B) slope of the total cases (or total deaths)</b>, together with the <b>(C) length of the ramp up period</b>, could be used to rank each country’s efforts at flattening the curb, ultimately providing an overall country ranking system and thus determining which country’s efforts were successful and which were not. 
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <center><img src="data/ramp_up.JPG" alt="Ramp Up"> </center>
+
+                                <table class="table">
+                                    <tbody class="bg-white">
+                                    <tr>
+                                        <td>
+                                            <br><center><b>Which countries were more/less successful at flattening the curve based on their initial stringency efforts?</b></center>
+ 
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table bg-white">
+                                    <thead class="thead-light text-center">
+                                      <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col">Stringency Ramp Up Ranking<br>(A)+(C)</th>
+                                        <th scope="col">Overall Cases Ranking<br>(A)+(B=Cases)+(C)</th>
+                                        <th scope="col">Overall Deaths Ranking<br>(A)+(B=Deaths)+(C)</th>
+                                        <th scope="col">Overall Ranking<br>(A)+(B=Cases+Deaths)+(C)</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <th scope="row">Top 10 Countries</th>
+                                        <td>
+                                            1. Jordan<br>2. Angola<br>3. Laos<br>4. Ecuador<br>5. Kyrgyzstan<br>6. Rwanda<br>7. Austria<br>8. Mexico<br>9. Ukraine<br>10. United Kingdom
+                                        </td>
+                                        <td>
+                                            1. Laos<br>2. Angola<br>3. Jordan<br>4. Rwanda<br>5. Uganda<br>6. Zimbabwe<br>7. Gambia<br>8. Eritrea<br>9. Chad<br>10. Mauritius
+                                        </td>
+                                        <td>
+                                            1. Laos<br>2. Angola<br>3. Jordan<br>4. Rwanda<br>5. Uganda<br>6. Zimbabwe<br>7. Eritrea<br>8. Cote d'Ivoire<br>9. Gambia<br>10. Guinea
+                                        </td>
+                                        <td>
+                                            1. Laos<br>2. Angola<br>3. Uganda<br>4. Rwanda<br>5. Jordan<br>6. Eritrea<br>7. Gambia<br>8. Zimbabwe<br>9. Sri Lanka<br>10. Chad
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">Bottom 10 Countries</th>
+                                        <td>
+                                            153. Suriname<br>154. Japan<br>155. Mozambique<br>156. Malaysia<br>157. Oman<br>158. Iran<br>159. Venezuela<br>160. Australia<br>161. Guam<br>162. Malawi
+                                        </td>
+                                        <td>
+                                            153. Italy<br>154. Suriname<br>155. Iceland<br>156. Brazil<br>157. Oman<br>158. Singapore<br>159. Guam<br>160. Kuwait<br>161. Iran<br>162. Chile
+                                        </td>
+                                        <td>
+                                            153. Azerbaijan<br>154. Peru<br>155. El Salvador<br>156. Kuwait<br>157. Suriname<br>158. Brazil<br>159. Guam<br>160. Italy<br>161. Chile<br>162. Iran
+                                        </td>
+                                        <td>
+                                            153. El Salvador<br>154. Suriname<br>155. Iceland<br>156. Guam<br>157. Peru<br>158. Kuwait<br>159. Italy<br>160. Brazil<br>161. Iran<br>162. Chile
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                </table>
+
+                                <table class="table">
+                                    <thead class="thead-light text-center">
+                                        <tr>
+                                            <th scope="col text-center">Findings</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white">
+                                    <tr>
+                                        <td>
+                                            <b>Is there any relationship between the timing and severity of each countries initial stringency efforts and their outcome of total cases and deaths as a percentage of population?</b>
+ 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            There is an extremely low correlation between the slope of the ramp up period and resulting total cases and deaths, however when reviewing the results of the top and bottom ranked countries, 
+                                            those with a quicker/higher ramp up period showed more promising results regarding total cases and deaths versus those with longer/lower ramp up periods. There appears to be something behind the numbers that warrants further exploration.<br>
+                                            
+                                            <br>Further avenues for analysis: group similar countries (ex. government structure, GDP, population sentiment towards government, social unrest, etc.) and compare the results of each country within each grouping with the hopes of providing a more equitable comparison.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <center><img src="data/ramp_corr.JPG" alt="Ramp Up Correlation"> </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+    <hr class="m-5"/>
+    
+    <div class="container max-auto">
+
+        <div class="row d-flex justify-content-center mb-4">
+            <div class="col_md_12 text-center">
+                <h1>Median Age By Continent</h1>
+            </div>
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h5>
+                Analysis to determine which continent posed the highest risk for the spread of COVID-19.
+                </h5>
+            </div>
+        </div>
+
+        <!--Line charts of median age by continent -->
+        <div class="row d-flex justify-content-center m-3">
+            <div class="col_md_4 text-center mr-3">
+                <div id="plotArea-PR"></div>
+            </div>
+            <div class="col_md_4 text-center">
+                <div id="plotArea-AF"></div>
+            </div>
+        </div>
+
+        <div class="row d-flex justify-content-center m-3">
+            <div class="col_md_4 text-center mr-3">
+                <div id="plotArea-EU"></div>
+            </div>
+            <div class="col_md_4 text-center">
+                <div id="plotArea-AS"></div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="row m-5"><a id="conclusions"></a></div>
+
+    <!----------------------Conclusions----------------------->
+    <!-- jumbotron -->
+    <div class="row d-flex justify-content-center mt-1 mb-3">
+        <div class="col-md-12">
+            <div class='jumbotron text-center' id="banner_3">
+                <h1>Conclusions</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container max-auto">
+        <div class="row">
+            <div class="col-md-12 mb-5">
+
+                <h2 class="text-center">Supervised Machine Learning (ML)</h2><br>
+                <h5>
+                (1) Future total cases and deaths due to COVID-19 can be predicted with high accuracy.<br><br><br><br>
+                </h5>
+                <h2 class="card-title text-center">Data Analysis</h2><br>
+                <h5 class="card-text">
+                (2) Aggressive government measures did "flatten the curve" to provide relief for healthcare resources.
+                (Aggressive stringency (S) and health/containment (H) measures correlated with increased time from the first case to the max. number of new cases.)<br><br>
+                (3) High median age was associated with worse outcomes.<br><br>
+                (4) Stringency measures were being enforced and/or obeyed. (Changes in mobility seemed reactive to government measures.)<br><br>
+                (5) Countries may have higher numbers of cases and deaths because they test more frequently,
+                not because of ineffective governments.<br><br>
+                (6) A group of 16 countries was identified that had a profile of high government responses,
+                high median ages, and lower mobility restrictions, and that experienced worse outcomes.<br><br>
+                (7) S and H measures that resulted in better outcomes included more aggressive school, workplace, and public transport closures,
+                    restrictions on gathering, and stay-at-home requirements; coordinated public information campaigns about COVID-19;
+                    and larger emergency investments in healthcare and vaccine development.
+                </h5>
+        
+            </div>
+        </div>
+
+         <!-- Button: Return To Top -->
+        <div class="row">
+        <div class="col text-center m-5 pb-4">
+            <a id="back-to-top" href="#">
+                <button type="button" class="btn btn-outline-light">Return To The Top</button>
+            </a>
+        </div>
+        </div>
+    </div>
+
+    </div>
+
+    <!--JS libraries (including D3)-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!--Leaflet JS-->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+    <!--Plotly JS-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!--API key-->
+    <script type="text/javascript" src="config.js"></script>
+
+    <!--JavaScript Files-->   
+    <script type="text/javascript" src="logic.js"></script>
+
+</body>
+
+</html>

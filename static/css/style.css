@@ -1,0 +1,71 @@
+body {
+    color: #FFFFFF;
+}
+
+#banner_1 {
+    background-image: url("../images/banner_1_dark.jpg");
+    background-size: 100% 100%;
+    text-align: center;
+    height: 175px;
+    padding-top: 55px;
+    color: #FFFFFF;
+}
+#banner_3 {
+  background-image: url("../images/banner_3.jpg");
+  background-size: 100% 175%;
+  height: 100px;
+  text-align: center;
+  padding-top: 25px;
+  color: #000000;
+}
+
+#mapModel { 
+  width: 1000px;
+  height: 600px;
+}
+
+.legend {
+  padding: 10px;
+  line-height: 18px;
+  color: #555;
+  background-color: #fff;
+  opacity: 1;
+  border-radius: 5px;
+} 
+.legend i {
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin-right: 0px;
+  opacity: 1;
+}
+
+.legend e {
+  float: left;
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  opacity: 1;
+}
+
+#mapResponse { 
+  width: 725px;
+  height: 425px;
+}
+
+#mapClasses { 
+  width: 700px;
+  height: 400px;
+}
+
+hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+img.animated-gif {
+  width: 600px;
+  height: auto;
+}
