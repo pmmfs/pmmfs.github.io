@@ -8,7 +8,7 @@ var filters = {
 function init() {
 
     // maps
-    // buildMapModel();
+    buildMapModel();
     buildMapResponse();
     buildMapClasses();  
 
@@ -124,237 +124,236 @@ function init() {
 
     // boxplots for country classes
     buildBoxplots();
-
-    // line charts for median age analysis
-    buildAgeLineCharts();
-
 };
 
 // Activate default display function
 init();
 
-// // //-------------------------------mapModel-------------------------------------------------------
-// function buildMapModel() {
+// //-------------------------------mapModel-------------------------------------------------------
+function buildMapModel() {
 
-//     // Create tile layers that will be background options for the map
-//     let dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-//         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//         maxZoom: 18,
-//         accessToken: API_KEY
-//     });
+    // Create tile layers that will be background options for the map
+    let dark = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        accessToken: API_KEY
+    });
     
-//     let light = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}", {
-//         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-//         maxZoom: 18,
-//         accessToken: API_KEY
-//     });
+    let light = L.tileLayer("https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/{z}/{x}/{y}?access_token={accessToken}", {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        accessToken: API_KEY
+    });
 
-//     // Create a base layer that holds all tile layers
-//     let baseMaps = {
-//         "Dark": dark,
-//         "Light": light
-//     };
+    // Create a base layer that holds all tile layers
+    let baseMaps = {
+        "Dark": dark,
+        "Light": light
+    };
 
-//     // Create overlay layers for the map 
-//     let predictions = new L.layerGroup();
-//     let actual = new L.layerGroup();
-//     let countries = new L.layerGroup();
+    // Create overlay layers for the map 
+    let predictions = new L.layerGroup();
+    let actual = new L.layerGroup();
+    let countries = new L.layerGroup();
     
-//     let overlays = {
-//         "Predictions": predictions,
-//         "Actual": actual,
-//         "Country Borders": countries
-//     };
+    let overlays = {
+        "Predictions": predictions,
+        "Actual": actual,
+        "Country Borders": countries
+    };
 
-//     // Create a map object with a center & zoom level
-//     let map = L.map("mapModel", {
-//         center: [20.52, 20.34],
-//         zoom: 2.45,
-//         layers: [dark]
-//     });
+    // Create a map object with a center & zoom level
+    let map = L.map("mapModel", {
+        center: [20.52, 20.34],
+        zoom: 2.45,
+        layers: [dark]
+    });
 
-//     // Pass map layers into our layers control & add the layers control to the map
-//     L.control.layers(baseMaps, overlays).addTo(map);
+    // Pass map layers into our layers control & add the layers control to the map
+    L.control.layers(baseMaps, overlays).addTo(map);
 
-//     // Access data
-//     let caseDeathData = "data/countryCoords_new.json";
-//     let countriesData = "data/countriesIndices.json";
+    // Access data
+    let caseDeathData = "data/countryCoords_new.json";
+    let countriesData = "data/countriesIndices.json";
 
-//     // Function returns style data for the overlay layers
-//     function styleInfo_predictions(feature) {
-//         return {
-//             opacity: 1,
-//             fillOpacity: 1,
-//             fillColor: getColor_predictions(feature.properties.pred_totCases),
-//             color: "#000000",
-//             radius: getRadius(feature.properties.pred_totCases),
-//             stroke: true,
-//             weight: 0.5
-//         };
-//     }
+    // Function returns style data for the overlay layers
+    function styleInfo_predictions(feature) {
+        return {
+            opacity: 1,
+            fillOpacity: 1,
+            fillColor: getColor_predictions(feature.properties.pred_totDeaths),
+            color: "#000000",
+            radius: getRadius(feature.properties.pred_totDeaths),
+            stroke: true,
+            weight: 0.5
+        };
+    }
 
-//     // Function determines circle color based on case/death count
-//     function getColor_predictions(predictions) {
-//         if (predictions > 100) {
-//             return "rgb(103,0,31)";
-//         }
-//         if (predictions > 80) {
-//             return "rgb(178,24,43)";
-//         }
-//         if (predictions > 60) {
-//             return "rgb(214,96,77)";
-//         }
-//         if (predictions > 40) {
-//             return "rgb(244,165,130)";
-//         }
-//         if (predictions > 20) {
-//             return "rgb(253,219,199)";
-//         }
-//         return "rgb(247,247,247)";
-//     }
+    // Function determines circle color based on case/death count
+    function getColor_predictions(predictions) {
+        if (predictions > 25000) {
+            return "rgb(103,0,31)";
+        }
+        if (predictions > 20000) {
+            return "rgb(178,24,43)";
+        }
+        if (predictions > 15000) {
+            return "rgb(214,96,77)";
+        }
+        if (predictions > 10000) {
+            return "rgb(244,165,130)";
+        }
+        if (predictions > 5000) {
+            return "rgb(253,219,199)";
+        }
+        return "#FFFF99";
+    }
 
-//     function styleInfo_reality(feature) {
-//         return {
-//             opacity: 1,
-//             fillOpacity: 1,
-//             fillColor: getColor_reality(feature.properties.real_totCases),
-//             color: "#000000",
-//             radius: getRadius(feature.properties.real_totCases),
-//             stroke: true,
-//             weight: 0.5
-//         };
-//     }
+    function styleInfo_reality(feature) {
+        return {
+            opacity: 1,
+            fillOpacity: 1,
+            fillColor: getColor_reality(feature.properties.real_totDeaths),
+            color: "#000000",
+            radius: getRadius(feature.properties.real_totDeaths),
+            stroke: true,
+            weight: 0.5
+        };
+    }
 
-//     // Function determines circle color based on case/death count
-//     function getColor_reality(real) {
-//         if (real > 100) {
-//             return "rgb(5,48,97)";
-//         }
-//         if (real > 80) {
-//             return "rgb(33,102,172)";
-//         }
-//         if (real > 60) {
-//             return "rgb(67,147,195)";
-//         }
-//         if (real > 40) {
-//             return "rgb(146,197,222)";
-//         }
-//         if (real > 20) {
-//             return "rgb(209,229,240)";
-//         }
-//         return "rgb(247,247,247)";
-//     }
+    // Function determines circle color based on case/death count
+    function getColor_reality(real) {
+        if (real > 25000) {
+            return "rgb(5,48,97)";
+        }
+        if (real > 20000) {
+            return "rgb(33,102,172)";
+        }
+        if (real > 15000) {
+            return "rgb(67,147,195)";
+        }
+        if (real > 10000) {
+            return "rgb(146,197,222)";
+        }
+        if (real > 5000) {
+            return "rgb(209,229,240)";
+        }
+        return "#9999FF";
+    }
 
-//     // Function determines radius based on case/death count
-//     // case counts of 0 will be plotted with a radius of 0.5
-//     function getRadius(counts) {
-//         if (counts === 0) {
-//             return 1 / 2;
-//         }
-//         return counts / 2;
-//     }
+    // Function determines radius based on case/death count
+    // case counts of 0 will be plotted with a radius of 0.5
+    function getRadius(counts) {
+        if (counts > 25000) {
+            return 50;
+        }
+        if (counts < 1000) {
+            return 5;
+        }
+        if (counts < 5000) {
+            return 10;
+        }
+        return counts / 500;
+    }
 
-//     // Grab the JSON data
-//     d3.json(caseDeathData).then(function(data) {
-//         // Create a JSON layer with the retrieved data
-//         L.geoJson(data, {
+    // Grab the JSON data
+    d3.json(caseDeathData).then(function(data) {
+        // Create a JSON layer with the retrieved data
+        L.geoJson(data, {
 
-//             // Turn each feature into a circleMarker on the map
-//             pointToLayer: function(feature, latlng) {
-//                 return L.circleMarker(latlng);
-//             },
-//             // Set style for each feature's layer using styleInfo function
-//             style: styleInfo_predictions,
-//             // Create popup
-//             onEachFeature: function(feature, layer) {
-//                 layer.bindPopup("<h4>" + feature.properties.CountryName + "</h4>Predicted Total Cases: "
-//                 + feature.properties.pred_totCases + "<br>Difference From Actual: "
-//                 + feature.properties.diff_totCases);
-//             }
-//         }).addTo(predictions);
-//         // Add predictions layer to the map
-//         predictions.addTo(map);
-//     });
+            // Turn each feature into a circleMarker on the map
+            pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng);
+            },
+            // Set style for each feature's layer using styleInfo function
+            style: styleInfo_predictions,
+            // Create popup
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup("<h4>" + feature.properties.CountryName + "</h4>Predicted Total Deaths: "
+                + feature.properties.pred_totDeaths + "<br>Actual Total Deaths: "
+                + feature.properties.real_totDeaths + "<br>% Difference From Actual: "
+                + feature.properties.diff_totDeaths)
+            }
+        }).addTo(predictions);
+        // Add predictions layer to the map
+        predictions.addTo(map);
+    });
 
-//     // Grab the JSON data
-//     d3.json(caseDeathData).then(function(data) {
-//         // Create a JSON layer with the retrieved data
-//         L.geoJson(data, {
+    // Grab the JSON data
+    d3.json(caseDeathData).then(function(data) {
+        // Create a JSON layer with the retrieved data
+        L.geoJson(data, {
 
-//             // Turn each feature into a circleMarker on the map
-//             pointToLayer: function(feature, latlng) {
-//                 return L.circleMarker(latlng);
-//             },
-//             // Set style for each feature's layer using styleInfo function
-//             style: styleInfo_reality,
-//             // Create popup
-//             onEachFeature: function(feature, layer) {
-//                 layer.bindPopup("<h4>" + feature.properties.CountryName + "</h4>Actual Total Cases: "
-//                 + feature.properties.real_totCases);
-//             }
-//         }).addTo(actual);
-//         // Add actual counts layer to the map
-//         actual.addTo(map);
-//     });
+            // Turn each feature into a circleMarker on the map
+            pointToLayer: function(feature, latlng) {
+                return L.circleMarker(latlng);
+            },
+            // Set style for each feature's layer using styleInfo function
+            style: styleInfo_reality,
+            // Create popup
+            onEachFeature: function(feature, layer) {
+                layer.bindPopup("<h4>" + feature.properties.CountryName + "</h4>Actual Total Deaths: "
+                + feature.properties.real_totDeaths);
+            }
+        }).addTo(actual);
+    });
 
-//     // Set color for country borders
-//     let styleInfo_countries = {   
-//         fillOpacity: 0,
-//         color: "rgb(247,247,247)",
-//         stroke: true,
-//         weight: 1
-//     };
+    // Set color for country borders
+    let styleInfo_countries = {   
+        fillOpacity: 0,
+        color: "#808080",
+        stroke: true,
+        weight: 1
+    };
 
-//     // Grab the GeoJSON data
-//     d3.json(countriesData).then(function(data) {
+    // Grab the GeoJSON data
+    d3.json(countriesData).then(function(data) {
 
-//         // Create a GeoJSON layer with the retrieved data
-//         L.geoJson(data, {
-//             style: styleInfo_countries,
-//         }).addTo(countries);
-//         // Add overlay layer to the map
-//         countries.addTo(map);
-//     });
+        // Create a GeoJSON layer with the retrieved data
+        L.geoJson(data, {
+            style: styleInfo_countries,
+        }).addTo(countries);
+    });
 
-//     // Add a "legend control object" of colors corresponding to quake magnitudes
-//     let legend = L.control({
-//         position: "bottomleft"
-//     });
+    // Add a "legend control object" of colors corresponding to quake magnitudes
+    let legend = L.control({
+        position: "bottomleft"
+    });
 
-//     // Add details for the legend
-//     legend.onAdd = function() {
-//         // create a div with a class "legend"
-//         let div = L.DomUtil.create('div', 'legend'); 
-//         const cases = [0, 20, 40, 60, 80, 100];
-//         const colors = [
-//             "rgb(247,247,247)",
-//             "rgb(253,219,199)",
-//             "rgb(244,165,130)",
-//             "rgb(214,96,77)",
-//             "rgb(178,24,43)",
-//             "rgb(103,0,31)"
-//         ];
-//         const colors_actual = [
-//             "rgb(247,247,247)",
-//             "rgb(209,229,240)",
-//             "rgb(146,197,222)",
-//             "rgb(67,147,195)",
-//             "rgb(33,102,172)",
-//             "rgb(5,48,97)"
-//         ];
+    // Add details for the legend
+    legend.onAdd = function() {
+        // create a div with a class "legend"
+        let div = L.DomUtil.create('div', 'legend'); 
+        const cases = ["0", "5K", "10K", "15K", "20K", "25K"];
+        const colors = [
+            "#FFFF99",
+            "rgb(253,219,199)",
+            "rgb(244,165,130)",
+            "rgb(214,96,77)",
+            "rgb(178,24,43)",
+            "rgb(103,0,31)"
+        ];
+        const colors_actual = [
+            "#9999FF",
+            "rgb(209,229,240)",
+            "rgb(146,197,222)",
+            "rgb(67,147,195)",
+            "rgb(33,102,172)",
+            "rgb(5,48,97)"
+        ];
 
-//         // Loop through count intervals to generate a label with a colored square for each interval.
-//     for (var i = 0; i < cases.length; i++) {
-//             div.innerHTML +=
-//             "<i style='background: " + colors[i] + "'></i> " + "<e style='background: " + colors_actual[i] + "'></e> " + cases[i] + (cases[i + 1] ? "&ndash;" + cases[i + 1] + "<br><br>" : "+");
-//         };
-//         return div;
-//     }
+        // Loop through count intervals to generate a label with a colored square for each interval.
+    for (var i = 0; i < cases.length; i++) {
+            div.innerHTML +=
+            "<i style='background: " + colors[i] + "'></i> " + "<e style='background: " + colors_actual[i] + "'></e> " + cases[i] + (cases[i + 1] ? "&ndash;" + cases[i + 1] + "<br><br>" : "+");
+        };
+        return div;
+    }
 
-//     // Add legend to the map
-//     legend.addTo(map);
+    // Add legend to the map
+    legend.addTo(map);
 
-// }
+}
 
 // function to build feature selection pie charts
 function buildPieCharts() {
@@ -1283,7 +1282,7 @@ function buildMapResponse() {
             onEachFeature: function(feature, layer) {
                 layer.bindPopup("<h4>" + feature.properties.name + "</h4>"
                 + "E Index Score: " + feature.properties.econ_index + "/100<br>"
-                + "E Ranking: " + feature.properties.econ_rank + "th out of 179 countries<br>"
+                + "E Ranking: " + feature.properties.econ_rank + "th out of 160 countries<br>"
                 + "E Percentile: " + feature.properties.econ_percentile
                 );
             }
@@ -1291,9 +1290,6 @@ function buildMapResponse() {
 
         // Add countries layer to the map
         govResp.addTo(map);
-        string.addTo(map);
-        health.addTo(map);
-        econ.addTo(map);
     });
 };
 
@@ -1989,107 +1985,4 @@ function buildBoxplots() {
 
     Plotly.newPlot("boxplot_TC3MO", data, layout, {displayModeBar: false});
     });
-}
-
-function buildAgeLineCharts() {
-
-    // Extreme Poverty Rating Per Continent
-    var trace = {
-        x: ["Africa", "Asia", "Europe", "North America", "Oceania"],
-        y: [32.67, 5.30, 0.94, 5.07, 0.92],
-        type: "line",
-        line: {
-            color: "rgb(178,24,43)"
-        }  
-    };
-    var data = [trace];
-    var layout = {
-        title: " Poverty Rating Per Continent",
-        xaxis: { title: "Continent", showgrid: false, tickcolor: "#FFFFFF", zeroline: true},
-        yaxis: { title: "Extreme Poverty Rating", showgrid: false, tickcolor: "#FFFFFF", showline: true},
-        width: 400,
-        height: 300,
-        plot_bgcolor: "rgba(0, 0, 0, 0)",
-        paper_bgcolor: "rgba(0, 0, 0, 0)",
-        font: {
-            size: 13,
-            color: '#FFFFFF'
-        }
-    };
-    Plotly.newPlot("plotArea-PR", data, layout, {displayModeBar: false});
-
-    // Covid 19 Affected Age Group in Africa
-    var trace1 = {
-        x: ["(0,20)", "(20,30)", "(30,40)", "(40,50)"],
-        y: [31, 15, 3, 0],
-        type: "line",
-        line: {
-            color: "rgb(33,102,172)"
-        } 
-    };
-    var data1 = [trace1];
-    var layout1 = {
-        title: " Covid 19 Affected Age Group in Africa",
-        xaxis: { title: "Median Age Group", showgrid: false, tickcolor: "#FFFFFF", zeroline: true},
-        yaxis: { title: "Country Count", showgrid: false, tickcolor: "#FFFFFF", showline: true},
-        width: 400,
-        height: 300,
-        plot_bgcolor: "rgba(0, 0, 0, 0)",
-        paper_bgcolor: "rgba(0, 0, 0, 0)",
-        font: {
-            size: 13,
-            color: '#FFFFFF'
-        }
-    };
-    Plotly.newPlot("plotArea-AF", data1, layout1, {displayModeBar: false});
-
-  // Covid 19 Affected Age Group in Europe
-    var trace2 = {
-        x: ["(0,20)", "(20,30)", "(30,40)", "(40,50)"],
-        y: [0, 0, 8, 29],
-        type: "line",
-        line: {
-            color: "rgb(67,147,195)"
-        } 
-    };
-    var data2 = [trace2];
-    var layout2 = {
-        title: " Covid 19 Affected Age Group in Europe",
-        xaxis: { title: "Median Age Group", showgrid: false, tickcolor: "#FFFFFF", zeroline: true},
-        yaxis: { title: "Country Count", showgrid: false, tickcolor: "#FFFFFF", showline: true},
-        width: 400,
-        height: 300,
-        plot_bgcolor: "rgba(0, 0, 0, 0)",
-        paper_bgcolor: "rgba(0, 0, 0, 0)",
-        font: {
-            size: 13,
-            color: '#FFFFFF'
-        }
-    };
-    Plotly.newPlot("plotArea-EU", data2, layout2, {displayModeBar: false});
-
-    // Covid 19 Affected Age Group in Asia
-    var trace3 = {
-        x: ["(0,20)", "(20,30)", "(30,40)", "(40,50)"],
-        y: [3, 18, 17, 5],
-        type: "line",
-        line: {
-            color: "rgb(146,197,222)"
-        }
-    };
-    var data3 = [trace3];
-    var layout3 = {
-        title: " Covid 19 Affected Age Group in Asia",
-        xaxis: { title: "Median Age Group", showgrid: false, tickcolor: "#FFFFFF", zeroline: true},
-        yaxis: { title: "Country Count", showgrid: false, tickcolor: "#FFFFFF", showline: true},
-        width: 400,
-        height: 300,
-        plot_bgcolor: "rgba(0, 0, 0, 0)",
-        paper_bgcolor: "rgba(0, 0, 0, 0)",
-        font: {
-            size: 13,
-            color: '#FFFFFF'
-        }
-    };
-    Plotly.newPlot("plotArea-AS", data3, layout3, {displayModeBar: false});
 }

@@ -106,25 +106,28 @@
             <div class="col-md-12 text-center mb-5">
                 <h5 style= "text-align:left;">
                 A supervised machine learning (ML) model was created to predict future counts of total cases and deaths.
-                <!--Text for ML map: Use the map to compare the model's predictions with actual counts.-->
+                The model has a high overall accuracy of 99% for predictions 30 days into the future. 
+                However, the less data available for a country (i.e. dates with corresponding case and death counts), 
+                the poorer the accuracy for that country. 
+                Use the map below to compare predicted vs. actual counts of total deaths 30 days later (Aug. 31, 2020).
                 </h5>
             </div>
         </div>
 
-        <!--map for supervised ML in progress-->
-        <!-- <div class="row">
+        <!--map for supervised ML-->
+        <div class="row">
             <div class="col-md-12 d-flex justify-content-center mb-5">
                 <div id="mapModel"></div>
             </div>
-        </div> -->
+        </div>
 
         <div class="row d-flex justify-content-center mb-3">
             <h2>Feature Selection</h2>
         </div>
 
         <div class="text-center mb-4">
-            <h5>
-            Features were selected for the model based on the feature importances of a Random Forest Regressor model.
+            <h5 style= "text-align:left;">
+            Features were selected for the model based on the feature importances of a Random Forest Regressor model. The charts below show the feature importances (in percentages) for predicting the total number of cases and deaths with R-squared values of 0.98 and 1.00, respectively.
             </h5>
         </div>
 
@@ -154,12 +157,6 @@
     
    <div class="container max-auto">
 
-        <div class="row d-flex justify-content-center m-4">
-            <div class="col_md_12 text-center">
-                <h1>New Cases / Deaths</h1>
-            </div>
-        </div>
-
         <!-- Filter & text -->
         <div class="row mb-4">
             <!--Filter-->
@@ -187,7 +184,7 @@
             </div>
             
             <!--Text--> 
-            <div class="col-md-9 text-left mt-5 pt-5 my-auto">
+            <div class="col-md-9 text-left mt-5 my-auto">
                 <h5>
                 The human cost of COVID-19 is shown below.<br><br>
                 View the numbers of new cases and new deaths for one country
@@ -985,7 +982,7 @@
         <!-- Filter & text -->
         <div class="row mb-4">
             <!--Filter-->
-            <div class="col-md-3 d-flex justify-content-center my-auto">
+            <div class="col px-md-3 d-flex justify-content-center my-auto">
                 <ul class="list-group">
                     <li class="list-group-item bg-dark text-center">
                         <label for="selCountry3">Country 1</label>
@@ -1006,11 +1003,11 @@
                 </form>
             </div>
     
-            <!--Text--> <!---MK NEW-->
-            <div class="col-md-9 text-left mt-5 pt-5 my-auto">
+            <!--Text-->
+            <div class="col px-md-9 text-left mt-5 pt-5 my-auto">
                 <h5>
                     Each country’s stringency “ramp up” period (the time it takes for each government to implement their most stringent policies - based on Stringency Index) was isolated.
-                    <br><br>Then each country’s 30, 60, 90, and 120 day reported totals for both total cases and total deaths from the beginning of the ramp up period, as a percentage of population, was captured.
+                    <br><br>Then each country’s 30-, 60-, 90-, and 120-day reported totals for both total cases and total deaths from the beginning of the ramp up period, as a percentage of population, was captured.
                     <br><br>Lastly, the global average for both stringency ramp up as well as for total cases and total deaths was determined in order to compare a country’s efforts against the global average, as well as against other countries.
                 </h5>
             </div>
@@ -1018,10 +1015,10 @@
           
         <!-- Line Chart: Ramp Up vs Total Cases & Deaths-->
         <div class="row d-flex justify-content-center mb-5">
-            <div class="col-5 mr-5">
+            <div class="col px-md-6">
                 <div id="rampUpCases"></div>
             </div>
-            <div class="col-5 mr-5">
+            <div class="col px-md-6">
                 <div id="rampUpDeaths"></div>
             </div>
         </div>
@@ -1146,7 +1143,7 @@
         </div>
     </div> 
 
-    <hr class="m-5"/>
+    <!-- <hr class="m-5"/>
     
     <div class="container max-auto">
 
@@ -1162,10 +1159,10 @@
                 Analysis to determine which continent posed the highest risk for the spread of COVID-19.
                 </h5>
             </div>
-        </div>
+        </div> -->
 
         <!--Line charts of median age by continent -->
-        <div class="row d-flex justify-content-center m-3">
+        <!-- <div class="row d-flex justify-content-center m-3">
             <div class="col_md_4 text-center mr-3">
                 <div id="plotArea-PR"></div>
             </div>
@@ -1183,7 +1180,7 @@
             </div>
         </div>
     
-    </div>
+    </div> -->
 
     <div class="row m-5"><a id="conclusions"></a></div>
 
@@ -1203,12 +1200,11 @@
 
                 <h2 class="text-center">Supervised Machine Learning (ML)</h2><br>
                 <h5>
-                (1) Future total cases and deaths due to COVID-19 can be predicted with high accuracy.<br><br><br><br>
+                (1) Future total cases and deaths due to COVID-19 can be predicted with high accuracy (if enough data is available).<br><br><br><br>
                 </h5>
                 <h2 class="card-title text-center">Data Analysis</h2><br>
                 <h5 class="card-text">
-                (2) Aggressive government measures did "flatten the curve" to provide relief for healthcare resources.
-                (Aggressive stringency (S) and health/containment (H) measures correlated with increased time from the first case to the max. number of new cases.)<br><br>
+                (2) Aggressive stringency (S) and health/containment (H) measures increased the time for countries to reach their max. number of cases.<br><br>
                 (3) High median age was associated with worse outcomes.<br><br>
                 (4) Stringency measures were being enforced and/or obeyed. (Changes in mobility seemed reactive to government measures.)<br><br>
                 (5) Countries may have higher numbers of cases and deaths because they test more frequently,
