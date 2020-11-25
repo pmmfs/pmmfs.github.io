@@ -62,7 +62,7 @@
             On Sept. 22, 2020, the 
             <a href="https://covid19.who.int/?gclid=CjwKCAjwwab7BRBAEiwAapqpTPhhtEwzZFGMWPn4MM2-YNPRDin7Sn6xks23lTd7wnHLhuRufRrDaRoCYEoQAvD_BwE">World Health Organization (WHO)</a> 
             reported 31,132,906 cases of
-            COVID-19,including 962,008 deaths. In an article featured on June 8, 2020, 
+            COVID-19, including 962,008 deaths. In an article featured on June 8, 2020, 
             <a href="https://www.worldbank.org/">The World Bank</a> predicted a "5.2% contraction
             in global GDP in 2020... the deepest global recession in decades".<br><br>
 
@@ -106,7 +106,7 @@
             <div class="col-md-12 text-center mb-5">
                 <h5 style= "text-align:left;">
                 A supervised machine learning (ML) model was created to predict future counts of total cases and deaths.
-                The model has a high overall accuracy of 99% for predictions 30 days into the future. 
+                The model had a high overall coefficient of determination (>99%) for predictions 30 days into the future. 
                 However, the less data available for a country (i.e. dates with corresponding case and death counts), 
                 the poorer the accuracy for that country. 
                 Use the map below to compare predicted vs. actual counts of total deaths 30 days later (Aug. 31, 2020).
@@ -386,7 +386,7 @@
                                     <td>High government response (specifically in stringency & health)</td>
                                     <td>
                                         - Decreased mobility outdoors, and increased staying at home <br>
-                                        - Longer time from 1st case to max. number of new cases. ("Flattening the curve.")
+                                        - Longer time from 1st case to max. number of new cases. 
                                     </td>
                                 </tr>
                                 <tr>
@@ -424,7 +424,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">6</th>
-                                    <td>Longer time from 1st case to max. number of new cases ("flattening the curve")</td>
+                                    <td>Longer time from 1st case to max. number of new cases</td>
                                     <td>
                                         - Lower number of new and total cases at 3 months
                                     </td>
@@ -455,15 +455,14 @@
                             <h5 class="card-title text-dark">#1</h5>
                             <p class="card-text text-dark">
                             - Stringency measures are being enforced/obeyed<br>
-                            - Strict stringency and health measures did "flatten the curve" to provide relief for healthcare facilities<br>
+                            - Strict stringency and health measures increased the <i>time</i> to reach max. number of new cases 
+                            but had no effect on decreasing the max. number of new cases. (Measures did not actually "flatten the curve".)<br>
                             </p>
                             <h5 class="card-title text-dark">#2</h5>
                             <p class="card-text text-dark">
                             The most proactive governments:<br>
                             - Provide more economic support<br>
                             - Belong to countries with older populations<br>
-                            - (Findings may be reflective of "first world countries" which have more resources and tend to have older populations.
-                            Further investigation is required.)<br>
                             </p>
                             <h5 class="card-title text-dark">#3</h5>
                             <p class="card-text text-dark">
@@ -480,7 +479,7 @@
                             </p>
                             <h5 class="card-title text-dark">#6</h5>
                             <p class="card-text text-dark">
-                            - "Flattening the curve" or the measures associated with it, also reduce the number of cases and deaths in the longterm.<br>
+                            - Increased time to reach max. number of new cases was associated with reduced numbers of cases and deaths 3 months later.<br>
                             </p>
                         </div>
                     </div>
@@ -726,6 +725,7 @@
                                         <td>
                                         - Class 0 seemed to contain countries that were less affected by COVID as shown by lower overall numbers of cases and deaths. If this is true, then their lower government responses and more relaxed mobility restrictions were appropriate.<br> 
                                         - An alternate explanation is that these countries were affected by COVID but their governments did not respond appropriately and tested less frequently. In this case, the lower numbers of cases and deaths resulted from scarcity of testing and did not represent these countries’ true situations. 
+                                        Further investigation is needed.
                                         </td>
                                     </tr>
                                     <tr>
@@ -769,8 +769,8 @@
                 Stringency (S) and health/containment (H) measures were the only components of a government's response 
                 that had, at least, "low" correlation (correlation coefficient of 0.3 to less than 0.5) with an 
                 outcome - time (days) from the first case to the max. number of new cases. <br><br>
-                The longer the time from the first case to the max. number of cases, the more a country was able to
-                "flatten the curve" to provide relief for its healthcare resources.<br><br>
+                The longer the time from the first case to the max. number of cases, the more a country was able to 
+                provide relief for its healthcare resources.<br><br>
                 To determine what the most effective S & H measures were,  
                 countries were ranked by this outcome, and S & H measures between the top 10 and bottom 10 countries 
                 were compared. 
@@ -1126,7 +1126,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            There is an extremely low correlation between the slope of the ramp up period and resulting total cases and deaths, however when reviewing the results of the top and bottom ranked countries, 
+                                            There is no correlation between the slope of the ramp up period and resulting total cases and deaths. However, when reviewing the results of the top and bottom ranked countries, 
                                             those with a quicker/higher ramp up period showed more promising results regarding total cases and deaths versus those with longer/lower ramp up periods. There appears to be something behind the numbers that warrants further exploration.<br>
                                             
                                             <br>Further avenues for analysis: group similar countries (ex. government structure, GDP, population sentiment towards government, social unrest, etc.) and compare the results of each country within each grouping with the hopes of providing a more equitable comparison.
@@ -1142,45 +1142,6 @@
             </div>
         </div>
     </div> 
-
-    <!-- <hr class="m-5"/>
-    
-    <div class="container max-auto">
-
-        <div class="row d-flex justify-content-center mb-4">
-            <div class="col_md_12 text-center">
-                <h1>Median Age By Continent</h1>
-            </div>
-        </div>
-
-        <div class="row text-center">
-            <div class="col-md-12">
-                <h5>
-                Analysis to determine which continent posed the highest risk for the spread of COVID-19.
-                </h5>
-            </div>
-        </div> -->
-
-        <!--Line charts of median age by continent -->
-        <!-- <div class="row d-flex justify-content-center m-3">
-            <div class="col_md_4 text-center mr-3">
-                <div id="plotArea-PR"></div>
-            </div>
-            <div class="col_md_4 text-center">
-                <div id="plotArea-AF"></div>
-            </div>
-        </div>
-
-        <div class="row d-flex justify-content-center m-3">
-            <div class="col_md_4 text-center mr-3">
-                <div id="plotArea-EU"></div>
-            </div>
-            <div class="col_md_4 text-center">
-                <div id="plotArea-AS"></div>
-            </div>
-        </div>
-    
-    </div> -->
 
     <div class="row m-5"><a id="conclusions"></a></div>
 
@@ -1200,7 +1161,7 @@
 
                 <h2 class="text-center">Supervised Machine Learning (ML)</h2><br>
                 <h5>
-                (1) Future total cases and deaths due to COVID-19 can be predicted with high accuracy (if enough data is available).<br><br><br><br>
+                (1) Future total cases and deaths due to COVID-19 can be predicted with a high overall coefficient of determination (if enough data is available).<br><br><br><br>
                 </h5>
                 <h2 class="card-title text-center">Data Analysis</h2><br>
                 <h5 class="card-text">
